@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.btnPrinteaza = new System.Windows.Forms.Button();
+            this.btnSterge = new System.Windows.Forms.Button();
+            this.btnEditeaza = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -45,16 +47,16 @@
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(97, 88);
+            this.listView1.Location = new System.Drawing.Point(41, 88);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(572, 226);
+            this.listView1.Size = new System.Drawing.Size(676, 260);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            //this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // btnPrinteaza
             // 
-            this.btnPrinteaza.Location = new System.Drawing.Point(302, 364);
+            this.btnPrinteaza.Location = new System.Drawing.Point(303, 364);
             this.btnPrinteaza.Name = "btnPrinteaza";
             this.btnPrinteaza.Size = new System.Drawing.Size(156, 36);
             this.btnPrinteaza.TabIndex = 2;
@@ -62,11 +64,33 @@
             this.btnPrinteaza.UseVisualStyleBackColor = true;
             this.btnPrinteaza.Click += new System.EventHandler(this.btnPrinteaza_Click);
             // 
+            // btnSterge
+            // 
+            this.btnSterge.Location = new System.Drawing.Point(41, 369);
+            this.btnSterge.Name = "btnSterge";
+            this.btnSterge.Size = new System.Drawing.Size(174, 31);
+            this.btnSterge.TabIndex = 10;
+            this.btnSterge.Text = "Sterge";
+            this.btnSterge.UseVisualStyleBackColor = true;
+            this.btnSterge.Click += new System.EventHandler(this.btnSterge_Click);
+            // 
+            // btnEditeaza
+            // 
+            this.btnEditeaza.Location = new System.Drawing.Point(543, 369);
+            this.btnEditeaza.Name = "btnEditeaza";
+            this.btnEditeaza.Size = new System.Drawing.Size(174, 31);
+            this.btnEditeaza.TabIndex = 9;
+            this.btnEditeaza.Text = "Editeaza";
+            this.btnEditeaza.UseVisualStyleBackColor = true;
+            this.btnEditeaza.Click += new System.EventHandler(this.btnEditeaza_Click);
+            // 
             // Afisare_Materiale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSterge);
+            this.Controls.Add(this.btnEditeaza);
             this.Controls.Add(this.btnPrinteaza);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
@@ -83,5 +107,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button btnPrinteaza;
+        private System.Windows.Forms.Button btnSterge;
+        private System.Windows.Forms.Button btnEditeaza;
     }
 }

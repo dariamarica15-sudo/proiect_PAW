@@ -65,6 +65,7 @@
             this.tbIdContract.Name = "tbIdContract";
             this.tbIdContract.Size = new System.Drawing.Size(135, 22);
             this.tbIdContract.TabIndex = 2;
+            this.tbIdContract.TextChanged += new System.EventHandler(this.tbIdContract_TextChanged);
             // 
             // cbIdFurnizor
             // 
@@ -82,7 +83,6 @@
             this.Contracte.Name = "Contracte";
             this.Contracte.Size = new System.Drawing.Size(317, 132);
             this.Contracte.TabIndex = 4;
-            //this.Contracte.SelectedIndexChanged += new System.EventHandler(this.Contracte_SelectedIndexChanged);
             // 
             // btnSalveaza
             // 

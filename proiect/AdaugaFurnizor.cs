@@ -55,9 +55,8 @@ namespace proiect
             this.AutoValidate = AutoValidate.Disable;
         }
 
-        // ============================
         // SALVARE FURNIZOR
-        // ============================
+
         private void BtnSalveaza_Click(object sender, EventArgs e)
         {
             // Validare ID
@@ -92,6 +91,9 @@ namespace proiect
             );
 
             // Adăugare în lista globală
+            FurnizorRepository repo = new FurnizorRepository();
+            repo.AdaugaFurnizor(furnizorNou);
+
             Form1.furnizori.Add(furnizorNou);
 
             // Afișare în ListBox-ul local
@@ -106,9 +108,7 @@ namespace proiect
             tbEmail.Clear();
         }
 
-        // ============================
         // VALIDARE ID (doar la salvare)
-        // ============================
         private void tbId_Validating(object sender, CancelEventArgs e)
         {
             if (renunt) return; // dacă renunți, nu validăm nimic
@@ -125,9 +125,8 @@ namespace proiect
             errorProvider1.SetError(userControl11.TbId, "");
         }
 
-        // ============================
         // VALIDARE TELEFON
-        // ============================
+        
         private void tbTelefon_Validating(object sender, CancelEventArgs e)
         {
             if (renunt) return;
@@ -144,9 +143,7 @@ namespace proiect
             errorProvider2.SetError(tbTelefon, "");
         }
 
-        // ============================
         // DRAG & DROP
-        // ============================
         private void Sugestii_MouseDown(object sender, MouseEventArgs e)
         {
             if (Sugestii.SelectedItem != null)
@@ -165,9 +162,8 @@ namespace proiect
             tb.Text = (string)e.Data.GetData(DataFormats.Text);
         }
 
-        // ============================
         // RENUNȚARE (fără validare)
-        // ============================
+
         private void btnRenunta_Click(object sender, EventArgs e)
         {
             renunt = true; // dezactivăm validările
@@ -176,6 +172,11 @@ namespace proiect
 
         private void AdaugaFurnizor_Load(object sender, EventArgs e)
         {
+        }
+
+        private void tbNume_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

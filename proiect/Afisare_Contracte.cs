@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace proiect
@@ -10,16 +11,22 @@ namespace proiect
         public Afisare_Contracte()
         {
             InitializeComponent();
-            this.Load += Afisare_Contracte_Load; 
+            this.Load += Afisare_Contracte_Load;
         }
 
         private void Afisare_Contracte_Load(object sender, EventArgs e)
         {
+            IncarcaContracte();
+        }
+
+        private void IncarcaContracte()
+        {
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
-            //listView1.GridLines = true;
+            listView1.GridLines = true;
 
             listView1.Columns.Clear();
+            
             listView1.Items.Clear();
 
             listView1.Columns.Add("ID Contract", 100);
@@ -73,7 +80,71 @@ namespace proiect
             }
         }
 
+        private void btnSterge_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selectați un contract din listă!");
+                return;
+            }
+
+            int idContract = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+
+            DialogResult rezultat = MessageBox.Show(
+                "Sigur doriți să ștergeți acest contract?",
+                "Confirmare ștergere",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (rezultat == DialogResult.Yes)
+            {
+                Contract contractDeSters = Form1.contracte
+                    .FirstOrDefault(c => c.IdContract == idContract);
+
+                if (contractDeSters != null)
+                {
+                    Form1.contracte.Remove(contractDeSters);
+                }
+
+                IncarcaContracte();
+
+                MessageBox.Show("Contractul a fost șters cu succes!");
+            }
+        }
+
+        private void btnEditeaza_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selectați un contract din listă!");
+                return;
+            }
+
+            int idContract = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+
+            Contract contractDeEditat = Form1.contracte
+                .FirstOrDefault(c => c.IdContract == idContract);
+
+            if (contractDeEditat == null)
+            {
+                MessageBox.Show("Contractul nu a fost găsit!");
+                return;
+            }
+
+            EditareContract editForm = new EditareContract(contractDeEditat);
+
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                IncarcaContracte();
+            }
+        }
+
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void Afisare_Contracte_Load_1(object sender, EventArgs e)
         {
 
         }

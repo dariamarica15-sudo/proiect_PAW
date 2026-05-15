@@ -65,6 +65,9 @@ namespace proiect
             // Salvăm contractul
             Form1.contracte.Add(c);
 
+            ContractRepository repo = new ContractRepository();
+            repo.AdaugaContract(c);
+
             // Afișăm în listbox
             Contracte.Items.Add(
                 $"Contract {c.IdContract} | Furnizor: {c.IdFurnizor} | Data: {c.DataContract.ToShortDateString()} | Total: {c.TotalContract} lei | Obs: {c.Observatii}"
@@ -83,6 +86,9 @@ namespace proiect
             this.Close();
         }
 
+        private void tbIdContract_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

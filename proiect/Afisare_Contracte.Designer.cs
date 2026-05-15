@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.btnPrinteaza = new System.Windows.Forms.Button();
+            this.btnSterge = new System.Windows.Forms.Button();
+            this.btnEditeaza = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -45,34 +47,56 @@
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(108, 77);
+            this.listView1.Location = new System.Drawing.Point(44, 71);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(552, 257);
+            this.listView1.Size = new System.Drawing.Size(681, 276);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // btnPrinteaza
             // 
-            this.btnPrinteaza.Location = new System.Drawing.Point(288, 370);
+            this.btnPrinteaza.Location = new System.Drawing.Point(297, 370);
             this.btnPrinteaza.Name = "btnPrinteaza";
-            this.btnPrinteaza.Size = new System.Drawing.Size(211, 23);
+            this.btnPrinteaza.Size = new System.Drawing.Size(174, 31);
             this.btnPrinteaza.TabIndex = 2;
             this.btnPrinteaza.Text = "Printeaza";
             this.btnPrinteaza.UseVisualStyleBackColor = true;
             this.btnPrinteaza.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnSterge
+            // 
+            this.btnSterge.Location = new System.Drawing.Point(44, 370);
+            this.btnSterge.Name = "btnSterge";
+            this.btnSterge.Size = new System.Drawing.Size(174, 31);
+            this.btnSterge.TabIndex = 7;
+            this.btnSterge.Text = "Sterge";
+            this.btnSterge.UseVisualStyleBackColor = true;
+            this.btnSterge.Click += new System.EventHandler(this.btnSterge_Click);
+            // 
+            // btnEditeaza
+            // 
+            this.btnEditeaza.Location = new System.Drawing.Point(551, 370);
+            this.btnEditeaza.Name = "btnEditeaza";
+            this.btnEditeaza.Size = new System.Drawing.Size(174, 31);
+            this.btnEditeaza.TabIndex = 6;
+            this.btnEditeaza.Text = "Editeaza";
+            this.btnEditeaza.UseVisualStyleBackColor = true;
+            this.btnEditeaza.Click += new System.EventHandler(this.btnEditeaza_Click);
             // 
             // Afisare_Contracte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSterge);
+            this.Controls.Add(this.btnEditeaza);
             this.Controls.Add(this.btnPrinteaza);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
             this.Name = "Afisare_Contracte";
             this.Text = "Afisare_Contracte";
-            //this.Load += new System.EventHandler(this.Afisare_Contracte_Load_1);
+            this.Load += new System.EventHandler(this.Afisare_Contracte_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -83,5 +107,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button btnPrinteaza;
+        private System.Windows.Forms.Button btnSterge;
+        private System.Windows.Forms.Button btnEditeaza;
     }
 }

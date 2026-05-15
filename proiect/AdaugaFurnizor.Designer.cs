@@ -104,6 +104,7 @@
             this.tbNume.Name = "tbNume";
             this.tbNume.Size = new System.Drawing.Size(159, 22);
             this.tbNume.TabIndex = 8;
+            this.tbNume.TextChanged += new System.EventHandler(this.tbNume_TextChanged);
             // 
             // tbCUI
             // 

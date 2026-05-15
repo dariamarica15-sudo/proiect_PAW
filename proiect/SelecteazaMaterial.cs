@@ -165,6 +165,9 @@ namespace proiect
 
             Form1.materialePeFurnizor[idFurnizor].Add(mat);
 
+            MaterialRepository repo = new MaterialRepository();
+            repo.AdaugaMaterial(mat, idFurnizor);
+
             Log.Items.Add($"[{DateTime.Now:HH:mm}] Material salvat pentru furnizorul {idFurnizor}: {material}");
 
             tbIdMaterial.Clear();
@@ -235,6 +238,11 @@ namespace proiect
         }
 
         private void SelecteazaMaterial_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbIdFurnizor_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

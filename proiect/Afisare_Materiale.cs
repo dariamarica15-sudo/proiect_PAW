@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace proiect
@@ -12,42 +13,142 @@ namespace proiect
             InitializeComponent();
         }
 
-        private void Afisare_Materiale_Load(object sender, EventArgs e)
+        private void IncarcaMateriale()
         {
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
+            listView1.GridLines = true;
 
             listView1.Columns.Clear();
-            listView1.Columns.Add("ID Material", 100);
+            listView1.Items.Clear();
+
+            listView1.Columns.Add("ID Comandă", 100);
             listView1.Columns.Add("Denumire", 150);
             listView1.Columns.Add("Cantitate", 100);
             listView1.Columns.Add("Preț", 100);
             listView1.Columns.Add("Furnizor ID", 100);
-            listView1.Columns.Add("Data contract", 120);
 
-            listView1.Items.Clear();
-
-            foreach (var c in Form1.contracte)
+            foreach (var entry in Form1.materialePeFurnizor)
             {
-                int idFurnizor = c.IdFurnizor;
-                DateTime data = c.DataContract;
+                int idFurnizor = entry.Key;
 
-                if (c.Materiale == null) continue;
-
-                foreach (var m in c.Materiale)
+                foreach (var m in entry.Value)
                 {
                     ListViewItem item = new ListViewItem(m.Id.ToString());
                     item.SubItems.Add(m.Denumire);
                     item.SubItems.Add(m.Cantitate.ToString());
                     item.SubItems.Add(m.PretUnitar.ToString());
                     item.SubItems.Add(idFurnizor.ToString());
-                    item.SubItems.Add(data.ToShortDateString());
 
                     listView1.Items.Add(item);
                 }
             }
         }
 
+        private Material CautaMaterialDupaId(int idMaterial)
+        {
+            foreach (var contract in Form1.contracte)
+            {
+                if (contract.Materiale == null)
+                    continue;
+
+                Material material = contract.Materiale.FirstOrDefault(m => m.Id == idMaterial);
+
+                if (material != null)
+                    return material;
+            }
+
+            foreach (var entry in Form1.materialePeFurnizor)
+            {
+                Material material = entry.Value.FirstOrDefault(m => m.Id == idMaterial);
+
+                if (material != null)
+                    return material;
+            }
+
+            return null;
+        }
+
+        private void Afisare_Materiale_Load(object sender, EventArgs e)
+        {
+            IncarcaMateriale();
+        }
+
+        private void btnSterge_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selectați un material!");
+                return;
+            }
+
+            int idMaterial = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+
+            DialogResult rezultat = MessageBox.Show(
+                "Sigur doriți să ștergeți acest material?",
+                "Confirmare ștergere",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (rezultat == DialogResult.Yes)
+            {
+                foreach (var contract in Form1.contracte)
+                {
+                    if (contract.Materiale != null)
+                    {
+                        Material material = contract.Materiale.FirstOrDefault(m => m.Id == idMaterial);
+
+                        if (material != null)
+                        {
+                            contract.Materiale.Remove(material);
+                            break;
+                        }
+                    }
+                }
+
+                foreach (var entry in Form1.materialePeFurnizor)
+                {
+                    Material material = entry.Value.FirstOrDefault(m => m.Id == idMaterial);
+
+                    if (material != null)
+                    {
+                        entry.Value.Remove(material);
+                        break;
+                    }
+                }
+
+                IncarcaMateriale();
+
+                MessageBox.Show("Materialul a fost șters cu succes!");
+            }
+        }
+
+        private void btnEditeaza_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selectați un material!");
+                return;
+            }
+
+            int idMaterial = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+
+            Material materialDeEditat = CautaMaterialDupaId(idMaterial);
+
+            if (materialDeEditat == null)
+            {
+                MessageBox.Show("Materialul nu a fost găsit!");
+                return;
+            }
+
+            EditareMaterial form = new EditareMaterial(materialDeEditat);
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                IncarcaMateriale();
+            }
+        }
 
         private void btnPrinteaza_Click(object sender, EventArgs e)
         {
@@ -86,6 +187,11 @@ namespace proiect
                     yPos += 25;
                 }
             }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

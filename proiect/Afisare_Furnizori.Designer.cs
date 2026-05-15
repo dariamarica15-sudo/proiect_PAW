@@ -37,6 +37,8 @@
             this.Email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.btnPrinteaza = new System.Windows.Forms.Button();
+            this.btnEditeaza = new System.Windows.Forms.Button();
+            this.btnSterge = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -49,9 +51,9 @@
             this.Telefon,
             this.Email});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(120, 55);
+            this.listView1.Location = new System.Drawing.Point(33, 55);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(563, 290);
+            this.listView1.Size = new System.Drawing.Size(694, 290);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -96,19 +98,41 @@
             // 
             // btnPrinteaza
             // 
-            this.btnPrinteaza.Location = new System.Drawing.Point(306, 372);
+            this.btnPrinteaza.Location = new System.Drawing.Point(301, 372);
             this.btnPrinteaza.Name = "btnPrinteaza";
-            this.btnPrinteaza.Size = new System.Drawing.Size(237, 31);
+            this.btnPrinteaza.Size = new System.Drawing.Size(174, 31);
             this.btnPrinteaza.TabIndex = 2;
             this.btnPrinteaza.Text = "Printeaza";
             this.btnPrinteaza.UseVisualStyleBackColor = true;
             this.btnPrinteaza.Click += new System.EventHandler(this.btnPrinteaza_Click);
+            // 
+            // btnEditeaza
+            // 
+            this.btnEditeaza.Location = new System.Drawing.Point(553, 372);
+            this.btnEditeaza.Name = "btnEditeaza";
+            this.btnEditeaza.Size = new System.Drawing.Size(174, 31);
+            this.btnEditeaza.TabIndex = 3;
+            this.btnEditeaza.Text = "Editeaza";
+            this.btnEditeaza.UseVisualStyleBackColor = true;
+            this.btnEditeaza.Click += new System.EventHandler(this.btnEditeaza_Click);
+            // 
+            // btnSterge
+            // 
+            this.btnSterge.Location = new System.Drawing.Point(33, 372);
+            this.btnSterge.Name = "btnSterge";
+            this.btnSterge.Size = new System.Drawing.Size(174, 31);
+            this.btnSterge.TabIndex = 4;
+            this.btnSterge.Text = "Sterge";
+            this.btnSterge.UseVisualStyleBackColor = true;
+            this.btnSterge.Click += new System.EventHandler(this.btnSterge_Click);
             // 
             // Afisare_Furnizori
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSterge);
+            this.Controls.Add(this.btnEditeaza);
             this.Controls.Add(this.btnPrinteaza);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
@@ -131,5 +155,7 @@
         private System.Windows.Forms.ColumnHeader Adresa;
         private System.Windows.Forms.ColumnHeader Telefon;
         private System.Windows.Forms.ColumnHeader Email;
+        private System.Windows.Forms.Button btnEditeaza;
+        private System.Windows.Forms.Button btnSterge;
     }
 }

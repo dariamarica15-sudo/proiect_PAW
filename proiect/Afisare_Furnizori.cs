@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace proiect
@@ -16,8 +12,18 @@ namespace proiect
         public Afisare_Furnizori(List<Furnizor> listaFurnizori)
         {
             InitializeComponent();
+            IncarcaFurnizori();
+        }
 
-            foreach (var furn in listaFurnizori)
+        private void IncarcaFurnizori()
+        {
+            listView1.View = View.Details;
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
+
+            listView1.Items.Clear();
+
+            foreach (var furn in Form1.furnizori)
             {
                 ListViewItem item = new ListViewItem(furn.Id.ToString());
                 item.SubItems.Add(furn.Nume);
@@ -30,7 +36,49 @@ namespace proiect
             }
         }
 
+        private void btnSterge_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selectați un furnizor din listă!");
+                return;
+            }
 
+            int id = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+
+            DialogResult rezultat = MessageBox.Show(
+                "Sigur doriți să ștergeți acest furnizor?",
+                "Confirmare ștergere",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (rezultat == DialogResult.Yes)
+            {
+                Furnizor furnizorDeSters = Form1.furnizori
+                    .FirstOrDefault(f => f.Id == id);
+
+                if (furnizorDeSters != null)
+                {
+                    Form1.furnizori.Remove(furnizorDeSters);
+                }
+
+                // Ștergem și materialele asociate furnizorului, dacă există
+                if (Form1.materialePeFurnizor.ContainsKey(id))
+                {
+                    Form1.materialePeFurnizor.Remove(id);
+                }
+
+                // Ștergem și contractele asociate furnizorului
+                Form1.contracte.RemoveAll(c => c.IdFurnizor == id);
+
+                IncarcaFurnizori();
+
+                MessageBox.Show("Furnizorul a fost șters cu succes!");
+            }
+        }
+
+        
 
         private void btnPrinteaza_Click(object sender, EventArgs e)
         {
@@ -45,7 +93,6 @@ namespace proiect
                 printDocument.Print();
             }
         }
-
 
         private void PrintDocumentFurnizori_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -66,11 +113,37 @@ namespace proiect
 
         private void Afisare_Furnizori_Load(object sender, EventArgs e)
         {
+        }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void btnEditeaza_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selectați un furnizor din listă!");
+                return;
+            }
+
+            int id = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+
+            Furnizor furnizorDeEditat = Form1.furnizori
+                .FirstOrDefault(f => f.Id == id);
+
+            if (furnizorDeEditat == null)
+            {
+                MessageBox.Show("Furnizorul nu a fost găsit!");
+                return;
+            }
+
+            EditareFurnizor editForm = new EditareFurnizor(furnizorDeEditat);
+
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                IncarcaFurnizori();
+            }
         }
     }
-
 }
-
-
-

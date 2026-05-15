@@ -104,6 +104,7 @@
             this.cbIdFurnizor.Name = "cbIdFurnizor";
             this.cbIdFurnizor.Size = new System.Drawing.Size(141, 24);
             this.cbIdFurnizor.TabIndex = 7;
+            this.cbIdFurnizor.SelectedIndexChanged += new System.EventHandler(this.cbIdFurnizor_SelectedIndexChanged);
             // 
             // cbMaterial
             // 

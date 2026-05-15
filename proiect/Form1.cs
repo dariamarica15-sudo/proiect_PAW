@@ -28,6 +28,26 @@ namespace proiect
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            FurnizorRepository repo = new FurnizorRepository();
+            furnizori = repo.GetFurnizori();
+
+            ContractRepository contractRepo = new ContractRepository();
+            contracte = contractRepo.GetContracte();
+
+            MaterialRepository materialRepo = new MaterialRepository();
+            materialePeFurnizor = materialRepo.GetMateriale();
+
+            foreach (var contract in contracte)
+            {
+                if (materialePeFurnizor.ContainsKey(contract.IdFurnizor))
+                {
+                    contract.Materiale =
+                        new List<Material>(
+                            materialePeFurnizor[contract.IdFurnizor]
+                        );
+                }
+            }
+
             // materiale default, ca să nu fie ComboBox-ul gol
             materiale.Add(new Material(1, "Ciment"));
             materiale.Add(new Material(2, "Fier beton"));
